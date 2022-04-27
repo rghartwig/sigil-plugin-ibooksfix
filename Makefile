@@ -2,7 +2,7 @@
 .PHONO := zip dev watch
 
 zip:
-	zip -r iBooksFix-0.1.zip iBooksFix
+	zip -r iBooksFix_0.2.zip iBooksFix
 
 dev:
 	cp -r iBooksFix/ ~/.local/share/sigil-ebook/sigil/plugins/
