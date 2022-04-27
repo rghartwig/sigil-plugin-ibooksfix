@@ -5,3 +5,5 @@ This output plugin fixes the xhtml toc in EPUB3 ebooks for iBooks. Sigil stores 
 When you run the plugin, it asks where you want to save the converted EPUB.
 
 Build (zip) the plugin by running `make`.
+
+Fixed on 2022-04-27 to work with newer versions of Sigil.
