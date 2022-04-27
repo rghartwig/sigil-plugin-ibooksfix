@@ -5,6 +5,8 @@
 # A bug in iOS iBooks fails to render its toc correctly otherwise
 # Only tested with epubs made with Sigil
 # by djazz
+#
+# 2022-04-27 RG Hartwig (greg@hartwig.com) added a fix for newer versions of Sigil
 
 import sys
 import os
@@ -178,7 +180,20 @@ def run(bk):
 
     print('Guide:', bk._w.guide)
 
-    write_file("application/epub+zip", os.path.join(temp_dir, "mimetype"))
+
+# START FIX by greg@hartwig.com on 2022-04-27 by copying from plugin ePub3-itizer v056
+# Fix to work with newer versions of Sigil
+    # get the default opf path and the opf file name
+    if bk.launcher_version() >= 20190927:
+        opf_path = os.path.join(bk._w.ebook_root, bk.get_opfbookpath())
+        opf_name = os.path.basename(opf_path)
+    else:
+        opf_name = bk._w.opfname
+        opf_path = os.path.join(bk._w.ebook_root, 'OEBPS', opf_name)
+
+    write_file(bk.get_opf(), os.path.join(root, opf_name))  # FIX
+# END FIX
+
 
     print('Saving EPUB to', fpath)
 
